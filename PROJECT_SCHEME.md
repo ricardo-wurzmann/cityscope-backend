@@ -248,3 +248,7 @@ app/db/session.py
 - [ ] ❌ `env.py` has `run_migrations_online()` function
 - [ ] ❌ `env.py` has entry point conditional
 
+
+
+como rodar:
+docker compose up -d --build
