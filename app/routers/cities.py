@@ -34,6 +34,33 @@ def debug_token(user=Depends(get_current_user)):
     return {"message": "OK", "user": user.email}
 
 
+@router.get("/{city_id}/details")
+def get_city_details(
+    city_id: int,
+    db: Session = Depends(get_db),
+    user=Depends(get_current_user),
+):
+    """Get detailed information for a specific city."""
+    # Query city with LEFT OUTER JOIN to indicator_values
+    city = db.query(City).filter(City.id == city_id).first()
+    
+    if not city:
+        raise HTTPException(status_code=404, detail=f"City with id {city_id} not found")
+    
+    # Get indicators (LEFT OUTER JOIN is handled by the relationship)
+    # For now, return empty list as per requirements
+    indicators = []
+    
+    return {
+        "id": city.id,
+        "name": city.name,
+        "uf": city.uf,
+        "region": city.region,
+        "area": city.area,
+        "indicators": indicators,
+    }
+
+
 @router.post("", response_model=CityRead, status_code=status.HTTP_201_CREATED)
 def create_city(city: CityCreate, db: Session = Depends(get_db), user=Depends(get_current_user)):
     """Create a new city record."""

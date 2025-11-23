@@ -1,5 +1,5 @@
 """FastAPI routers package."""
 
-from app.routers import auth, cities
+from app.routers import auth, cities, states
 
-__all__ = ["auth", "cities"]
+__all__ = ["auth", "cities", "states"]
