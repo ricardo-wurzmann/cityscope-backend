@@ -13,14 +13,25 @@ router = APIRouter(prefix="/cities", tags=["cities"])
 
 
 @router.get("")
-def get_cities(page: int = 1, limit: int = 50, uf: str | None = None, db: Session = Depends(get_db), user=Depends(get_current_user)):
+def get_cities(
+    page: int = 1,
+    limit: int = 50,
+    uf: str | None = None,
+    db: Session = Depends(get_db),
+    user=Depends(get_current_user),
+):
     """Get cities with pagination."""
     skip = (page - 1) * limit
     q = db.query(City)
     if uf:
         q = q.filter(City.uf == uf.upper())
     cities = q.order_by(City.uf, City.name).offset(skip).limit(limit).all()
-    return [{"id": c.id, "name": c.name, "uf": c.uf} for c in cities]
+    return [{"id": c.id, "name": c.name, "uf": c.uf, "region": c.region} for c in cities]
+
+
+@router.get("/debug/token")
+def debug_token(user=Depends(get_current_user)):
+    return {"message": "OK", "user": user.email}
 
 
 @router.post("", response_model=CityRead, status_code=status.HTTP_201_CREATED)

@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, Float
 from sqlalchemy.orm import relationship
 
 from app.db.base import Base
@@ -12,5 +12,6 @@ class City(Base):
     name = Column(String, index=True)
     uf = Column(String(2), index=True)
     region = Column(String, index=True, nullable=True)
+    area = Column(Float, nullable=True)  # Area in km²
 
     indicators = relationship("IndicatorValue", back_populates="city")

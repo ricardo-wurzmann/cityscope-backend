@@ -17,10 +17,11 @@ class IndicatorValueBase(BaseModel):
 
 
 class IndicatorValueOut(BaseModel):
-    indicator: str
+    indicator_code: str
+    indicator_name: str
+    year: int | None
     value: float
     unit: str | None
-    year: int
 
     class Config:
         from_attributes = True

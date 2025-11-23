@@ -22,9 +22,10 @@ def get_indicators_by_city(city_id: int, db: Session = Depends(get_db)):
     )
     return [
         IndicatorValueOut(
-            indicator=v.indicator.name,
-            value=v.value,
+            indicator_code=v.indicator.code,
+            indicator_name=v.indicator.name,
             year=v.year,
+            value=v.value,
             unit=v.indicator.unit
         )
         for v in values

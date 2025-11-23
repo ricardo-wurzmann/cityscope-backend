@@ -10,7 +10,7 @@ class IndicatorValue(Base):
     id = Column(Integer, primary_key=True, index=True)
     city_id = Column(Integer, ForeignKey("cities.id"))
     indicator_id = Column(Integer, ForeignKey("indicators.id"))
-    year = Column(Integer)
+    year = Column(Integer, nullable=True)  # Nullable for static indicators like AREA
     value = Column(Float)
 
     city = relationship("City", back_populates="indicators")
