@@ -1,13 +1,15 @@
-from sqlalchemy import Column, Integer, String, Text
+from sqlalchemy import Column, Integer, String
+from sqlalchemy.orm import relationship
 
-from db.base import Base
+from app.db.base import Base
 
 
 class Indicator(Base):
     __tablename__ = "indicators"
 
-    id = Column(Integer, primary_key=True)
-    code = Column(String(64), unique=True, index=True)  # ex: POP
-    name = Column(String(255))
-    description = Column(Text)
-    unit = Column(String(64))  # ex: habitantes
+    id = Column(Integer, primary_key=True, index=True)
+    code = Column(String, index=True)       # IBGE table code (SIDRA)
+    name = Column(String, index=True)
+    unit = Column(String, nullable=True)
+
+    values = relationship("IndicatorValue", back_populates="indicator")

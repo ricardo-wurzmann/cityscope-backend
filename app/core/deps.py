@@ -2,10 +2,10 @@ from fastapi import Depends, HTTPException, status
 from fastapi.security import HTTPBearer
 import jwt
 
-from core.config import settings
-from db.session import get_db
+from app.core.config import settings
+from app.db.session import get_db
 from sqlalchemy.orm import Session
-from models.user import User
+from app.models.user import User
 
 auth_scheme = HTTPBearer(auto_error=True)
 

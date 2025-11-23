@@ -1,9 +1,9 @@
 """SQLAlchemy models for the CityScope backend."""
 
-from models.city import City
-from models.indicator import Indicator
-from models.indicator_value import IndicatorValue
-from models.user import User
+from app.models.city import City
+from app.models.indicator import Indicator
+from app.models.indicator_value import IndicatorValue
+from app.models.user import User
 
 __all__ = [
     "City",

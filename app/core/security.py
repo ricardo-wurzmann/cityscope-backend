@@ -2,7 +2,7 @@ from datetime import datetime, timedelta, timezone
 import jwt
 import bcrypt
 
-from core.config import settings
+from app.core.config import settings
 
 
 def hash_password(raw: str) -> str:

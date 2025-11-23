@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from core.config import settings
-from routers import auth, cities
+from app.core.config import settings
+from app.routers import auth, cities, indicators
 
 app = FastAPI(title="CityScope API")
 
@@ -16,6 +16,7 @@ app.add_middleware(
 
 app.include_router(auth.router)
 app.include_router(cities.router)
+app.include_router(indicators.router)
 
 
 @app.get("/healthz")

@@ -1,5 +1,5 @@
 """FastAPI routers package."""
 
-from routers import auth, cities
+from app.routers import auth, cities
 
 __all__ = ["auth", "cities"]

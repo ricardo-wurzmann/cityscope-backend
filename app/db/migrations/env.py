@@ -11,10 +11,16 @@ if BASE_DIR not in sys.path:
 
 # Import Base and models (this registers all tables into Base.metadata)
 from db.base import Base
+from core.config import settings
 import models  # noqa: F401  # ensures models are imported
 
 # Alembic Config object
 config = context.config
+
+# Override sqlalchemy.url with environment variable if available
+database_url = os.getenv("DATABASE_URL")
+if database_url:
+    config.set_main_option("sqlalchemy.url", database_url)
 
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
